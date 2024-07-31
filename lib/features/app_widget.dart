@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:oohwee/features/splash/views/splash_view.dart';
+import 'package:oohwee/features/home/views/splash_view.dart';
 import 'package:oohwee/util/constants.dart';
 import 'package:oohwee/util/theme/pallete.dart';
 import 'package:oohwee/util/theme/theme_config.dart';
