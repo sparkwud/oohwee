@@ -1,4 +1,4 @@
-import 'package:oohwee/features/characters/views/widgets/character_status.dart';
+import 'package:oohwee/features/characters/views/widgets/character_status_widget.dart';
 
 class Character {
   Character({
