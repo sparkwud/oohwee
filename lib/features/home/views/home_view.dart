@@ -21,7 +21,7 @@ class HomeView extends ConsumerWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar.medium(
-            centerTitle: true,
+            centerTitle: false,
             title: Text(
               "${AppConstants.appName} 🤘👽🥒",
               style: context.h6?.copyWith(
