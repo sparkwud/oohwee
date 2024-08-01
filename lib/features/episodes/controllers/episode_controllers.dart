@@ -19,3 +19,9 @@ final episodeCharactersProvider =
   final apiService = ref.watch(apiServiceProvider);
   return apiService.getEpisodeCharacters(episodeId);
 });
+
+final characterEpisodesProvider =
+    FutureProvider.family<List<Episode>, int>((ref, characterId) async {
+  final apiService = ref.watch(apiServiceProvider);
+  return apiService.getCharacterEpisodes(characterId);
+});
