@@ -23,11 +23,14 @@ class CharacterDetailsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: CustomScrollView(
+
         slivers: [
           SliverAppBar(
-            expandedHeight: 230,
+            expandedHeight: 250,
             pinned: true,
-            flexibleSpace: CharacterAppBar(character: character),
+            flexibleSpace: CharacterAppBar(
+              character: character,
+            ),
           ),
           SliverPadding(
             padding: 16.0.padA,
@@ -42,7 +45,9 @@ class CharacterDetailsView extends ConsumerWidget {
   }
 
   Widget _buildEpisodes(WidgetRef ref) {
-    final episodesAsyncValue = ref.watch(episodesProvider(1));
+    final episodesAsyncValue = ref.watch(
+      characterEpisodesProvider(character.id),
+    );
 
     return episodesAsyncValue.when(
       data: (episodes) => SliverPadding(
@@ -93,10 +98,14 @@ class CharacterDetailsView extends ConsumerWidget {
           ),
         ),
       ),
-      loading: () => const SliverToBoxAdapter(
-        child: Center(child: CircularProgressIndicator()),
+      loading: () => const SliverFillRemaining(
+        hasScrollBody: false,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
-      error: (e, __) => SliverToBoxAdapter(
+      error: (e, __) => SliverFillRemaining(
+        hasScrollBody: false,
         child: ErrorView(
           refreshCallBack: () => ref.refresh(episodeProvider(1)),
           isConnection: Util.isConnectionError(e),
