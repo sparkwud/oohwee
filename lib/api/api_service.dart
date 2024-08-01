@@ -83,6 +83,18 @@ class ApiService {
     }
   }
 
+  Future<List<Episode>> getEpisodesByIds(List<String> ids) async {
+    try {
+      final response = await _dio.get('/episode/$ids');
+      if (response is Map<String, dynamic>) {
+        return [Episode.fromJson(response.data)];
+      }
+      return (response.data as List).map((e) => Episode.fromJson(e)).toList();
+    } catch (e) {
+      throw Exception('Failed to load episode: $e');
+    }
+  }
+
   Future<List<Character>> getEpisodeCharacters(int episodeId) async {
     try {
       final episodeResponse = await _dio.get('/episode/$episodeId');
@@ -107,6 +119,22 @@ class ApiService {
           .toList();
     } catch (e) {
       throw Exception('Failed to load episode characters: $e');
+    }
+  }
+
+  Future<List<Episode>> getCharacterEpisodes(int characterId) async {
+    try {
+      final character = await getCharacterById(characterId);
+      final episodeUrls = character.episode;
+
+      if (episodeUrls.isEmpty) {
+        return [];
+      }
+      final episodeIds = episodeUrls.map((url) => url.split('/').last).toList();
+      final episodes = await getEpisodesByIds(episodeIds);
+      return episodes;
+    } catch (e) {
+      throw Exception('Failed to load character episodes: $e');
     }
   }
 }
