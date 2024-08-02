@@ -36,15 +36,23 @@ class HomeView extends ConsumerWidget {
               ),
             ],
           ),
-          SliverToBoxAdapter(
-            child: charactersAsyncValue.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (e, __) => ErrorView(
+          charactersAsyncValue.when(
+            loading: () => const SliverFillRemaining(
+              hasScrollBody: false,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            error: (e, __) => SliverFillRemaining(
+              hasScrollBody: false,
+              child: ErrorView(
                 refreshCallBack: () => ref.refresh(charactersProvider(1)),
                 isConnection: Util.isConnectionError(e),
               ),
-              data: (characters) {
-                return ListView.separated(
+            ),
+            data: (characters) {
+              return SliverToBoxAdapter(
+                child: ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   separatorBuilder: (context, index) => 24.spacing,
@@ -61,32 +69,12 @@ class HomeView extends ConsumerWidget {
                       ),
                     );
                   },
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ],
       ),
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: Hero(
-      //     tag: "splash",
-      //     child: Text(
-      //       "${AppConstants.appName} 🤘👽🥒",
-      //       style: context.h6?.copyWith(
-      //         fontWeight: FontWeight.w600,
-      //         // color: context.colorScheme.onSecondary,
-      //       ),
-      //     ),
-      //   ),
-      //   actions: const [
-      //     Padding(
-      //       padding: EdgeInsets.only(right: 8.0),
-      //       child: ThemeToggler(),
-      //     ),
-      //   ],
-      // ),
-      // appBar: PreferredSize(preferredSize: ,),
     );
   }
 }
