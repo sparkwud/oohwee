@@ -100,3 +100,33 @@ class InfoCard extends StatelessWidget {
     );
   }
 }
+
+class InfoRow extends StatelessWidget {
+  final String label;
+  final String? content;
+  final Widget? other;
+
+  const InfoRow({
+    super.key,
+    required this.label,
+    this.content,
+    this.other,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          other ?? Text(content!),
+        ],
+      ),
+    );
+  }
+}
