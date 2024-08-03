@@ -3,19 +3,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oohwee/util/theme/theme_provider.dart';
 
 class ThemeToggler extends ConsumerWidget {
-  const ThemeToggler({super.key});
+  const ThemeToggler({
+    super.key,
+    this.size = 32,
+  });
+  final double size;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeNotifierProvider);
     // var brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = themeMode == ThemeMode.dark;
-    const double size = 32;
+    // const double size = 32;
 
     return GestureDetector(
       onTap: () => ref.read(themeNotifierProvider.notifier).toggleTheme(),
       child: Container(
-        width: 55,
+        width: 65,
         height: size,
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
         decoration: BoxDecoration(
