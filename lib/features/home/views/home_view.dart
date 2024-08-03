@@ -20,24 +20,6 @@ class HomeView extends ConsumerWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // SliverToBoxAdapter(
-          //   child: AppBar(
-          //     centerTitle: false,
-          //     title: Text(
-          //       "${AppConstants.appName} 🤘👽🥒",
-          //       style: context.h6?.copyWith(
-          //         fontWeight: FontWeight.w600,
-          //         color: Colors.white,
-          //       ),
-          //     ),
-          //     actions: const [
-          //       Padding(
-          //         padding: EdgeInsets.only(right: 8.0),
-          //         child: ThemeToggler(),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           SliverAppBar(
             pinned: true,
             centerTitle: false,
