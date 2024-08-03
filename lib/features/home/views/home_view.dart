@@ -7,6 +7,7 @@ import 'package:oohwee/util/constants.dart';
 import 'package:oohwee/util/extensions/spacing_extensions.dart';
 import 'package:oohwee/util/extensions/theme_extensions.dart';
 import 'package:oohwee/util/navigate.dart';
+import 'package:oohwee/util/theme/theme_provider.dart';
 import 'package:oohwee/util/util.dart';
 import 'package:oohwee/util/widgets/error_widget.dart';
 import 'package:oohwee/util/widgets/theme_toggler.dart';
@@ -17,7 +18,14 @@ class HomeView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final charactersAsyncValue = ref.watch(charactersProvider(1));
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        onPressed: () => ref.read(themeNotifierProvider.notifier).toggleTheme(),
+        label: const ThemeToggler(size: 40),
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar.medium(
@@ -29,12 +37,12 @@ class HomeView extends ConsumerWidget {
                 color: Colors.white,
               ),
             ),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: ThemeToggler(),
-              ),
-            ],
+            // actions: const [
+            //   Padding(
+            //     padding: EdgeInsets.only(right: 8.0),
+            //     child: ThemeToggler(),
+            //   ),
+            // ],
           ),
           charactersAsyncValue.when(
             loading: () => const SliverFillRemaining(
@@ -65,7 +73,9 @@ class HomeView extends ConsumerWidget {
                       character: character,
                       onTap: () => Navigate.pushPage(
                         context,
-                        CharacterDetailsView(character: character),
+                        CharacterDetailsView(
+                          character: character,
+                        ),
                       ),
                     );
                   },
