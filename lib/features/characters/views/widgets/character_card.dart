@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:oohwee/features/characters/model/character_model.dart';
 import 'package:oohwee/features/characters/views/widgets/character_status_widget.dart';
@@ -421,9 +422,14 @@ class CharacterImage extends StatelessWidget {
           topLeft: Radius.circular(10.0),
           bottomLeft: Radius.circular(10.0),
         ),
-        child: Image.network(
-          character.image,
+        child: CachedNetworkImage(
+          imageUrl: character.image,
           height: 155.0,
+          // placeholder: (context, url) => const Center(
+          //   child: CircularProgressIndicator(),
+          // ),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+          fit: BoxFit.cover, // Adjust fit if necessary
         ),
       ),
     );

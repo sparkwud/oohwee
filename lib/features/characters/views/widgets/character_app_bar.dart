@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:oohwee/features/characters/model/character_model.dart';
 
@@ -34,9 +35,13 @@ class CharacterAppBar extends StatelessWidget {
         blendMode: BlendMode.darken,
         child: Hero(
           tag: character.id,
-          child: Image.network(
-            character.image,
+          child: CachedNetworkImage(
+            imageUrl: character.image,
             fit: BoxFit.cover,
+            placeholder: (context, url) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
       ),

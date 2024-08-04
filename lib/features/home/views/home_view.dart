@@ -66,7 +66,9 @@ class HomeView extends ConsumerWidget {
                       character: character,
                       onTap: () => Navigate.pushPage(
                         context,
-                        CharacterDetailsView(character: character),
+                        CharacterDetailsView(
+                          character: character,
+                        ),
                       ),
                     );
                   },
